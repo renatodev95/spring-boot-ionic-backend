@@ -23,5 +23,5 @@ em linguagem orientada a objetos dos tópicos aprendidos no curso, quais sejam:
 ## Objetivos específicos: 
 1) Fazer uma implementação padrão do seguinte modelo conceitual: 
 
-
+![alt text](https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg)
 
