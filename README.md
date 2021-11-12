@@ -1,4 +1,4 @@
-# cursomc
+# Modelagem conceitual com UML
 Estudo de caso para curso de Modelagem Conceitual com UML desenvolvido em Java
 
 Este estudo de caso tem como objetivo mostrar na prática como um modelo conceitual pode ser implementado
