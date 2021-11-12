@@ -19,3 +19,9 @@ em linguagem orientada a objetos dos tópicos aprendidos no curso, quais sejam:
 * Tipos primitivos (ItemPedidoPK) 
 * Entidades fracas (ElementCollection) 
 * Associações direcionadas 
+
+## Objetivos específicos: 
+1) Fazer uma implementação padrão do seguinte modelo conceitual: 
+
+
+
