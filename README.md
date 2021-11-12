@@ -6,16 +6,16 @@ sobre o paradigma orientado a objetos, usando padrões de mercado e boas prátic
 Tomamos como caso um modelo conceitual abrangente, com o qual é mostrar a implementação prática
 em linguagem orientada a objetos dos tópicos aprendidos no curso, quais sejam:
 
-Leitura e entendimento do diagrama de classes \
-* Leitura e entendimento do diagrama de objetos \
-* Associações \
-* Um para muitos / muitos para um \
-* Um para um \ 
-* Muitos para muitos \
-* Conceito dependente \
-* Classe de associação \
-* Herança \
-* Enumerações \
-* Tipos primitivos (ItemPedidoPK) \
-* Entidades fracas (ElementCollection) \
-* Associações direcionadas \
+Leitura e entendimento do diagrama de classes 
+* Leitura e entendimento do diagrama de objetos 
+* Associações 
+* Um para muitos / muitos para um 
+* Um para um 
+* Muitos para muitos 
+* Conceito dependente 
+* Classe de associação 
+* Herança 
+* Enumerações 
+* Tipos primitivos (ItemPedidoPK) 
+* Entidades fracas (ElementCollection) 
+* Associações direcionadas 
