@@ -25,3 +25,9 @@ em linguagem orientada a objetos dos tópicos aprendidos no curso, quais sejam:
 
 ![alt text](https://github.com/renatodev95/cursomc/blob/main/img/img1.png)
 
+2) Criar a seguinte instância do modelo conceitual:
+
+![alt text](https://github.com/renatodev95/cursomc/blob/main/img/img2.png)
+
+3) Gerar uma base de dados relacional automaticamente a partir do modelo conceitual, bem como povoar a base com a instância dada.
+4) Recuperar os dados e disponibilizá-los por meio de uma API Rest BÁSICA. Os seguintes end points devem ser disponibilizados:
