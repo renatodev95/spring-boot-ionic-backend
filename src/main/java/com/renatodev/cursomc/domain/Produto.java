@@ -6,26 +6,32 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
-public class Categoria implements Serializable {
+public class Produto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private Double preco;
 
-    @ManyToMany(mappedBy = "categorias", cascade = CascadeType.PERSIST)
-    private List<Produto> produtos = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "PRODUTO_CATEGORIA",
+            joinColumns = @JoinColumn(name = "produto_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id")
+    )
+    private List<Categoria> categorias = new ArrayList<>();
 
-    public Categoria() {
+    public Produto() {
     }
 
-    public Categoria(Long id, String nome) {
+    public Produto(Long id, String nome, Double preco) {
         this.id = id;
         this.nome = nome;
+        this.preco = preco;
     }
 
     public Long getId() {
@@ -44,8 +50,16 @@ public class Categoria implements Serializable {
         this.nome = nome;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
     }
 
     @Override
@@ -53,9 +67,9 @@ public class Categoria implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Categoria categoria = (Categoria) o;
+        Produto produto = (Produto) o;
 
-        return Objects.equals(id, categoria.id);
+        return id.equals(produto.id);
     }
 
     @Override
@@ -65,5 +79,4 @@ public class Categoria implements Serializable {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
-
 }
