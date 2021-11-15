@@ -1,13 +1,8 @@
 package com.renatodev.cursomc;
 
-import com.renatodev.cursomc.domain.Categoria;
-import com.renatodev.cursomc.domain.Cidade;
-import com.renatodev.cursomc.domain.Estado;
-import com.renatodev.cursomc.domain.Produto;
-import com.renatodev.cursomc.repositories.CategoriaRepository;
-import com.renatodev.cursomc.repositories.CidadeRepository;
-import com.renatodev.cursomc.repositories.EstadoRepository;
-import com.renatodev.cursomc.repositories.ProdutoRepository;
+import com.renatodev.cursomc.domain.*;
+import com.renatodev.cursomc.domain.enums.TipoCliente;
+import com.renatodev.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,12 +26,21 @@ public class CursomcApplication implements CommandLineRunner {
     @Autowired
     private CidadeRepository cidadeRepository;
 
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(CursomcApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
+
+        // Instanciação de CATEGORIAS e PRODUTOS
+
         Categoria cat1 = new Categoria(null, "Informática");
         Categoria cat2 = new Categoria(null, "Escritório");
 
@@ -54,6 +58,8 @@ public class CursomcApplication implements CommandLineRunner {
         produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
         categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 
+        // Instanciação de ESTADOS e CIDADES
+
         Estado est1 = new Estado(null, "Minas Gerais");
         Estado est2 = new Estado(null, "São Paulo");
 
@@ -66,5 +72,18 @@ public class CursomcApplication implements CommandLineRunner {
 
         estadoRepository.saveAll(Arrays.asList(est1, est2));
         cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+
+        // Instanciação de CLIENTES e ENDEREÇOS
+
+        Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "045.567.132-25", TipoCliente.PESSOAFISICA);
+        cli1.getTelefones().addAll(Arrays.asList("2736-3323", "9382-8393"));
+
+        Endereco e1 = new Endereco(null, "Rua FLores", "300", "Apto 203", "Jardim", "38220834", cli1, c1);
+        Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+
+        cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+
+        clienteRepository.save(cli1);
+        enderecoRepository.saveAll(Arrays.asList(e1, e2));
     }
 }
