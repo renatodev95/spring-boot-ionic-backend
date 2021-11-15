@@ -1,5 +1,6 @@
 package com.renatodev.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.renatodev.cursomc.domain.enums.EstadoPagamento;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ public abstract class Pagamento implements Serializable {
     private Long id;
     private Integer estado;
 
+    @JsonBackReference // protegendo contra serialização cíclica
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
