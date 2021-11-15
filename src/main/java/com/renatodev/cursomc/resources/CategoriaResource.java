@@ -23,9 +23,4 @@ public class CategoriaResource {
         Categoria obj = service.buscar(id);
         return ResponseEntity.ok().body(obj);
     }
-
-    @GetMapping
-    public List<Categoria> listar() {
-        return service.findAll();
-    }
 }
