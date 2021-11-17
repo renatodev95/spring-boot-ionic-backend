@@ -17,8 +17,8 @@ public class CategoriaResource {
     private CategoriaService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> find(@PathVariable Long id) {
-        Categoria obj = service.buscar(id);
+    public ResponseEntity<Categoria> find(@PathVariable Long id) {
+        Categoria obj = service.find(id);
         return ResponseEntity.ok().body(obj);
     }
 
@@ -31,5 +31,12 @@ public class CategoriaResource {
                 .buildAndExpand(categoria.getId())
                 .toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@RequestBody Categoria categoria, @PathVariable Long id) {
+        categoria.setId(id);
+        categoria = service.update(categoria);
+        return ResponseEntity.noContent().build();
     }
 }
