@@ -26,7 +26,7 @@ public class CategoriaService {
     }
 
     public List<Categoria> findAll() {
-        return repo.findByOrderByNomeAsc();
+        return repo.findAll();
     }
 
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
@@ -39,9 +39,14 @@ public class CategoriaService {
         return repo.save(categoria);
     }
 
-    public void update(Categoria categoria) {
-        find(categoria.getId());
-        repo.save(categoria);
+    public Categoria update(Categoria obj) {
+        Categoria newObj = find(obj.getId());
+        updateData(newObj, obj);
+        return repo.save(newObj);
+    }
+
+    private void updateData(Categoria newObj, Categoria obj) {
+        newObj.setNome(obj.getNome());
     }
 
     public void deleteById(Long id) {
