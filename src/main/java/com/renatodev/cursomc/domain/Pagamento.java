@@ -1,6 +1,5 @@
 package com.renatodev.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.renatodev.cursomc.domain.enums.EstadoPagamento;
 

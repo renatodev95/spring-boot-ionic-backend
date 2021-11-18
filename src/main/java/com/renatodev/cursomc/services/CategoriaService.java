@@ -1,6 +1,7 @@
 package com.renatodev.cursomc.services;
 
 import com.renatodev.cursomc.domain.Categoria;
+import com.renatodev.cursomc.dto.CategoriaDTO;
 import com.renatodev.cursomc.repositories.CategoriaRepository;
 import com.renatodev.cursomc.services.exceptions.DataIntegrityException;
 import com.renatodev.cursomc.services.exceptions.ObjectNotFoundException;
@@ -38,9 +39,9 @@ public class CategoriaService {
         return repo.save(categoria);
     }
 
-    public Categoria update(Categoria categoria) {
+    public void update(Categoria categoria) {
         find(categoria.getId());
-        return repo.save(categoria);
+        repo.save(categoria);
     }
 
     public void deleteById(Long id) {
@@ -50,5 +51,9 @@ public class CategoriaService {
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos");
         }
+    }
+
+    public Categoria fromDto(CategoriaDTO categoriaDTO) {
+        return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
     }
 }
