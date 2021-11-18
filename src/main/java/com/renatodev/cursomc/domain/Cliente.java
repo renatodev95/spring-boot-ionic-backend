@@ -19,7 +19,7 @@ public class Cliente implements Serializable {
     private String cpfOuCnpj;
     private Integer tipo;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL) // toda operação que modificar um cliente vai refletir na relação com Endereco
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection
