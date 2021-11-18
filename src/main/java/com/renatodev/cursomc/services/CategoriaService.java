@@ -6,6 +6,9 @@ import com.renatodev.cursomc.services.exceptions.DataIntegrityException;
 import com.renatodev.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +22,15 @@ public class CategoriaService {
     public Categoria find(Long id) {
         return repo.findById(id).orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id:" + id + ", Tipo: " + Categoria.class.getName()));
+    }
+
+    public List<Categoria> findAll() {
+        return repo.findByOrderByNomeAsc();
+    }
+
+    public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        return repo.findAll(pageRequest);
     }
 
     public Categoria insert(Categoria categoria) {
@@ -38,9 +50,5 @@ public class CategoriaService {
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos");
         }
-    }
-
-    public List<Categoria> findAll() {
-        return repo.findByOrderByNomeAsc();
     }
 }
