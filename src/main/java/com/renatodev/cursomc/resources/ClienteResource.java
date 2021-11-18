@@ -2,13 +2,16 @@ package com.renatodev.cursomc.resources;
 
 import com.renatodev.cursomc.domain.Cliente;
 import com.renatodev.cursomc.dto.ClienteDTO;
+import com.renatodev.cursomc.dto.ClienteNewDTO;
 import com.renatodev.cursomc.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +46,19 @@ public class ClienteResource {
         return ResponseEntity.ok(listDto);
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+    @PostMapping
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
+        Cliente categoria = service.fromDTO(objDto);
+        categoria = service.insert(categoria);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(categoria.getId())
+                .toUri();
+        return ResponseEntity.created(uri).build();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Long id) {
         Cliente obj = service.fromDTO(objDto);
         obj.setId(id);
