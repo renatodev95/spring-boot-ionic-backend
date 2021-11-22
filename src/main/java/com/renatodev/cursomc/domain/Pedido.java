@@ -44,8 +44,7 @@ public class Pedido implements Serializable {
     }
 
     public Double getValorTotal() {
-        List<Double> subtotais = itens.stream().map(ItemPedido::getSubtotal).collect(Collectors.toList());
-        return subtotais.stream().reduce(0.0, Double::sum);
+        return itens.stream().map(ItemPedido::getSubtotal).reduce(0.0, Double::sum);
     }
 
     public Long getId() {
