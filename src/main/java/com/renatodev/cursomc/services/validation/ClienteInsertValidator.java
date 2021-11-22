@@ -1,7 +1,9 @@
 package com.renatodev.cursomc.services.validation;
 
+import com.renatodev.cursomc.domain.enums.TipoCliente;
 import com.renatodev.cursomc.dto.ClienteNewDTO;
 import com.renatodev.cursomc.resources.exceptions.FieldMessage;
+import com.renatodev.cursomc.services.validation.utils.BR;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -19,7 +21,13 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
     public boolean isValid(ClienteNewDTO objDto, ConstraintValidatorContext context) {
         List<FieldMessage> list = new ArrayList<>();
 
-        // incluindo testes aqui, inserindo erros na lista
+        if (objDto.getTipo().equals(TipoCliente.PESSOAFISICA.getCod()) && !BR.isValidCPF(objDto.getCpfOuCnpj())) {
+            list.add(new FieldMessage("cpfOuCnpj", "CPF inválido"));
+        }
+
+        if (objDto.getTipo().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(objDto.getCpfOuCnpj())) {
+            list.add(new FieldMessage("cpfOuCnpj", "CNPJ inválido"));
+        }
 
         for (FieldMessage e : list) {
             context.disableDefaultConstraintViolation();

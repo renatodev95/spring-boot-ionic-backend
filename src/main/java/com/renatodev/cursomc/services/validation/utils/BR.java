@@ -32,7 +32,7 @@ public class BR {
     /**
      * Valida CPF
      */
-    public static boolean isValidSsn(String ssn) {
+    public static boolean isValidCPF(String ssn) {
         if (ssn == null || !ssn.matches("\\d{11}") || ssn.matches(ssn.charAt(0) + "{11}")) return false;
         return check(ssn, 9, WEIGHT_SSN);
     }
@@ -40,7 +40,7 @@ public class BR {
     /**
      * Valida CNPJ
      */
-    public static boolean isValidTfn(String tfn) {
+    public static boolean isValidCNPJ(String tfn) {
         if (tfn == null || !tfn.matches("\\d{14}")) return false;
         return check(tfn, 12, WEIGHT_TFN);
     }

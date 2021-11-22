@@ -1,11 +1,13 @@
 package com.renatodev.cursomc.dto;
 
+import com.renatodev.cursomc.services.validation.ClienteInsert;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 
     @NotEmpty(message = "Preenchimento obrigatório")
