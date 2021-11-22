@@ -4,10 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Pedido implements Serializable {
@@ -46,11 +44,8 @@ public class Pedido implements Serializable {
     }
 
     public Double getValorTotal() {
-        Double result = 0.0;
-        for (ItemPedido ip : itens) {
-            result += ip.getSubtotal();
-        }
-        return result;
+        List<Double> subtotais = itens.stream().map(ItemPedido::getSubtotal).collect(Collectors.toList());
+        return subtotais.stream().reduce(0.0, Double::sum);
     }
 
     public Long getId() {
