@@ -1,6 +1,8 @@
 package com.renatodev.cursomc.config;
 
 import com.renatodev.cursomc.services.DBService;
+import com.renatodev.cursomc.services.EmailService;
+import com.renatodev.cursomc.services.MockEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,5 +21,10 @@ public class TestConfig {
     public boolean instantiateDatabase() throws ParseException {
         dbService.instantiateTestDatabase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService() {
+        return new MockEmailService();
     }
 }

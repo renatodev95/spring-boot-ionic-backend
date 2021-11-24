@@ -20,6 +20,9 @@ import java.util.Date;
 public class PedidoService {
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     private BoletoService boletoService;
 
     @Autowired
@@ -62,7 +65,7 @@ public class PedidoService {
             ip.setPedido(pedido);
         }
         itemPedidoRepository.saveAll(pedido.getItens());
-        System.out.println(pedido);
+        emailService.sendOrderConfirmationEmail(pedido);
         return pedido;
     }
 }
