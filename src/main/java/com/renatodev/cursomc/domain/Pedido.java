@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Entity
 public class Pedido implements Serializable {
@@ -46,7 +45,7 @@ public class Pedido implements Serializable {
     }
 
     public Double getValorTotal() {
-        return itens.stream().map(ItemPedido::getSubtotal).reduce(0.0, Double::sum);
+        return itens.stream().map(ItemPedido::getSubTotal).reduce(0.0, Double::sum);
     }
 
     public Long getId() {
