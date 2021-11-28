@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 !**/src/test/**/resources
 
+
 ### STS ###
 .apt_generated
 .classpath
