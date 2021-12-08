@@ -5,6 +5,7 @@ import com.renatodev.cursomc.domain.enums.EstadoPagamento;
 import com.renatodev.cursomc.domain.enums.TipoCliente;
 import com.renatodev.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -14,6 +15,9 @@ import java.util.Collections;
 
 @Service
 public class DBService {
+
+    @Autowired
+    private BCryptPasswordEncoder pe;
 
     @Autowired
     private CategoriaRepository categoriaRepository;
@@ -105,7 +109,7 @@ public class DBService {
 
         // Instanciação de CLIENTES e ENDEREÇOS
 
-        Cliente cli1 = new Cliente(null, "Maria Silva", "renato.2011@outlook.com", "045.567.132-25", TipoCliente.PESSOAFISICA);
+        Cliente cli1 = new Cliente(null, "Maria Silva", "renato.2011@outlook.com", "045.567.132-25", TipoCliente.PESSOAFISICA, pe.encode("123"));
         cli1.getTelefones().addAll(Arrays.asList("2736-3323", "9382-8393"));
 
         Endereco e1 = new Endereco(null, "Rua FLores", "300", "Apto 203", "Jardim", "38220834", cli1, c1);
