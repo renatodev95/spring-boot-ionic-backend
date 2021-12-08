@@ -2,6 +2,7 @@ package com.renatodev.cursomc.services;
 
 import com.renatodev.cursomc.domain.*;
 import com.renatodev.cursomc.domain.enums.EstadoPagamento;
+import com.renatodev.cursomc.domain.enums.Perfil;
 import com.renatodev.cursomc.domain.enums.TipoCliente;
 import com.renatodev.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,13 +113,19 @@ public class DBService {
         Cliente cli1 = new Cliente(null, "Maria Silva", "renato.2011@outlook.com", "045.567.132-25", TipoCliente.PESSOAFISICA, pe.encode("123"));
         cli1.getTelefones().addAll(Arrays.asList("2736-3323", "9382-8393"));
 
+        Cliente cli2 = new Cliente(null, "Ana Costa", "renatodev95@gmail.com", "935.734.810-78", TipoCliente.PESSOAFISICA, pe.encode("123"));
+        cli2.getTelefones().addAll(Arrays.asList("93883321", "34252131232625"));
+        cli2.addPerfil(Perfil.ADMIN);
+
         Endereco e1 = new Endereco(null, "Rua FLores", "300", "Apto 203", "Jardim", "38220834", cli1, c1);
         Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+        Endereco e3 = new Endereco(null, "Avenida Floriano", "20106", null, "Centro", "28177012", cli2, c2);
 
         cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+        cli2.getEnderecos().addAll(Arrays.asList(e3));
 
-        clienteRepository.save(cli1);
-        enderecoRepository.saveAll(Arrays.asList(e1, e2));
+        clienteRepository.saveAll(Arrays.asList(cli2, cli2));
+        enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 
         // Instanciação de PEDIDOS, ENDERECOS e PAGAMENTOS
 
