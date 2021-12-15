@@ -1,7 +1,6 @@
 package com.renatodev.cursomc.resources;
 
 import com.renatodev.cursomc.domain.Produto;
-import com.renatodev.cursomc.dto.CategoriaDTO;
 import com.renatodev.cursomc.dto.ProdutoDTO;
 import com.renatodev.cursomc.resources.utils.URL;
 import com.renatodev.cursomc.services.ProdutoService;

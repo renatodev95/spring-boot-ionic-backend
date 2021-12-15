@@ -3,11 +3,14 @@ package com.renatodev.cursomc.services;
 import com.renatodev.cursomc.domain.Cidade;
 import com.renatodev.cursomc.domain.Cliente;
 import com.renatodev.cursomc.domain.Endereco;
+import com.renatodev.cursomc.domain.enums.Perfil;
 import com.renatodev.cursomc.domain.enums.TipoCliente;
 import com.renatodev.cursomc.dto.ClienteDTO;
 import com.renatodev.cursomc.dto.ClienteNewDTO;
 import com.renatodev.cursomc.repositories.ClienteRepository;
 import com.renatodev.cursomc.repositories.EnderecoRepository;
+import com.renatodev.cursomc.security.UserSS;
+import com.renatodev.cursomc.services.exceptions.AuthorizationException;
 import com.renatodev.cursomc.services.exceptions.DataIntegrityException;
 import com.renatodev.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,10 @@ public class ClienteService {
     private BCryptPasswordEncoder pe;
 
     public Cliente find(Long id) {
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado");
+        }
         return repo.findById(id).orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id:" + id + ", Tipo: " + Cliente.class.getName()));
     }
